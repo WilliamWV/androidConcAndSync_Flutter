@@ -63,7 +63,7 @@ class _PhilosophersState extends State<PhilosophersScreen>{
                     child: Text(
                         "RUN"
                     ),
-                    onPressed: runMM,
+                    onPressed: runCS,
                   )
               ),
               Container(
@@ -109,7 +109,7 @@ class _PhilosophersState extends State<PhilosophersScreen>{
       ),
     );
   }
-  void runMM(){
+  void runCS(){
 
   }
 }

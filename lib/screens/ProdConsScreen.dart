@@ -70,7 +70,7 @@ class _ProdConsState extends State<ProdConsScreen>{
                     child: Text(
                         "RUN"
                     ),
-                    onPressed: runMM,
+                    onPressed: runCS,
                   )
               ),
               Container(
@@ -116,7 +116,7 @@ class _ProdConsState extends State<ProdConsScreen>{
       ),
     );
   }
-  void runMM(){
+  void runCS(){
 
   }
 }

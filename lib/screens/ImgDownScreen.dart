@@ -4,15 +4,15 @@ import 'package:androidconcurrency/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ConcSumScreen extends StatefulWidget{
-  ConcSumScreen({Key key}): super(key: key);
+class ImgDownScreen extends StatefulWidget{
+  ImgDownScreen({Key key}): super(key: key);
 
   @override
-  _ConcSumState createState() => _ConcSumState();
+  _ImgDownState createState() => _ImgDownState();
 
 }
 
-class _ConcSumState extends State<ConcSumScreen>{
+class _ImgDownState extends State<ImgDownScreen>{
 
   int _reportTime;
   String _reportTimeText = "";
@@ -21,7 +21,7 @@ class _ConcSumState extends State<ConcSumScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(CONC_SUM)
+          title: Text(IMG_DOWN)
       ),
       body: Center(
         child: Container(
@@ -32,28 +32,14 @@ class _ConcSumState extends State<ConcSumScreen>{
             children: <Widget>[
               Container(
                   child:Text(
-                    CONC_SUM,
+                    IMG_DOWN,
                     style: TextStyle(fontSize: TITLE_FONT_SIZE),
                   ),
                   padding: EdgeInsets.symmetric(vertical: MID_PADDING)
               ),
               Text(
-                  PROBL_DESCRIPTION[CONC_SUM],
+                  PROBL_DESCRIPTION[IMG_DOWN],
                   style: TextStyle(fontSize: DESCRIPTION_FONT_SIZE)
-              ),
-              TextField(
-                decoration: new InputDecoration(
-                    labelText: "Numbers",
-                    labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              TextField(
-                decoration: new InputDecoration(
-                    labelText: "Tasks to use",
-                    labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
-                ),
-                keyboardType: TextInputType.number,
               ),
               Container(
                   alignment: Alignment(0.0, 0.0),
@@ -64,9 +50,10 @@ class _ConcSumState extends State<ConcSumScreen>{
                     child: Text(
                         "RUN"
                     ),
-                    onPressed: runCS,
+                    onPressed: runID,
                   )
               ),
+              imageDisplayer(),
               Text(
                 REPORT,
                 style: TextStyle(fontSize: TITLE_FONT_SIZE),
@@ -89,8 +76,11 @@ class _ConcSumState extends State<ConcSumScreen>{
       ),
     );
   }
-  void runCS(){
+  void runID(){
 
+  }
+  Widget imageDisplayer(){
+    return Container();
   }
 }
 
