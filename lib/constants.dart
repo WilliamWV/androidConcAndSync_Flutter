@@ -12,6 +12,8 @@ const String REPORT = "Report";
 const String TIME = "Time:";
 const String AVERAGE = "Average:";
 const String DEVIATION = "Deviation:";
+const String PROD_ITEMS = "Produced items:";
+const String CONS_ITEMS = "Consumed items:";
 const String TITLE = "Android concurrency models comparission - Flutter version";
 
 // Problem Constants
