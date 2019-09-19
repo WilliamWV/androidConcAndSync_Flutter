@@ -1,3 +1,4 @@
+import 'package:androidconcurrency/screens/ConcSumScreen.dart';
 import 'package:androidconcurrency/screens/MatMultScreen.dart';
 import 'package:androidconcurrency/widgets/ProblemChooser.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,9 @@ class _InitScreenState extends State<InitScreen> {
       case MAT_MULT: 
         Navigator.push(context, MaterialPageRoute(builder: (context) => MatMultScreen()));
         break;
-      case CONC_SUM: break;
+      case CONC_SUM:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ConcSumScreen()));
+        break;
       case PHILOSOPHERS: break;
       case IMG_DOWN: break;
       case PROD_CONS: break;
