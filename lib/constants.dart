@@ -10,6 +10,8 @@ const double SMALL_PADDING = 4.0;
 
 const String REPORT = "Report";
 const String TIME = "Time:";
+const String AVERAGE = "Average:";
+const String DEVIATION = "Deviation:";
 const String TITLE = "Android concurrency models comparission - Flutter version";
 
 // Problem Constants
