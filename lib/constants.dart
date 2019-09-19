@@ -12,9 +12,13 @@ const String TITLE = "Android concurrency models comparission - Flutter version"
 // Problem Constants
 
 const String LABEL_CHOOSE_PROBLEM = "Choose one of the problems";
+const String MAT_MULT = "Matrix multiplication";
+const String CONC_SUM = "Concurrent sum";
+const String PHILOSOPHERS = "Philosophers";
+const String IMG_DOWN = "Image download";
+const String PROD_CONS = "Producers and consumers";
 const List PROBLEMS = [
-  "Matrix multiplication", "Concurrent sum", "Philosophers",
-  "Image download", "Producers and Consumers"
+  MAT_MULT, CONC_SUM, PHILOSOPHERS, IMG_DOWN, PROD_CONS
 ];
 
 

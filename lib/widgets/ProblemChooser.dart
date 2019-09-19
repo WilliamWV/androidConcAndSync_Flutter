@@ -5,14 +5,15 @@ class ProblemChooser extends StatefulWidget {
   ProblemChooser({Key key}) : super(key: key);
 
   @override
-  _ProblemChooserState createState() => new _ProblemChooserState();
+  ProblemChooserState createState() => new ProblemChooserState();
 
 }
 
-class _ProblemChooserState extends State<ProblemChooser> {
+class ProblemChooserState extends State<ProblemChooser> {
 
   List<DropdownMenuItem<String>> _menuItems;
   String _selectedProblem;
+  String get selectedProblem => _selectedProblem;
 
   @override
   void initState() {

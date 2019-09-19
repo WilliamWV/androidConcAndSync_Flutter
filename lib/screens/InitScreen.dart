@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
+final pcKey = new GlobalKey<ProblemChooserState>();
+
 class InitScreen extends StatefulWidget {
   InitScreen({Key key, this.title}) : super(key: key);
 
@@ -65,7 +67,7 @@ class _InitScreenState extends State<InitScreen> {
                 style: TextStyle(fontSize: TITLE_FONT_SIZE),
               ),
             ),
-            ProblemChooser(),
+            ProblemChooser(key: pcKey),
             RaisedButton(
               textColor: Colors.white,
               padding: const EdgeInsets.all(0.0),
@@ -73,12 +75,22 @@ class _InitScreenState extends State<InitScreen> {
               child: Text(
                   "DONE"
               ),
-
-              onPressed: () {},
+              onPressed: pressedDone,
             )
           ],
         ),
       ),
     );
   }
+  void pressedDone(){
+    var problem = pcKey.currentState.selectedProblem;
+    switch(problem){
+      case MAT_MULT: break;
+      case CONC_SUM: break;
+      case PHILOSOPHERS: break;
+      case IMG_DOWN: break;
+      case PROD_CONS: break;
+    }
+  }
 }
+
