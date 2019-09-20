@@ -39,3 +39,9 @@ const PROBL_DESCRIPTION = {
       "methods"
 };
 
+//Matrix multiplication
+const M1 = "m1";
+const M2 = "m2";
+const ID = "id";
+const TASKS = "tasks";
+const MAX_VAL = 20;
