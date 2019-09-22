@@ -106,7 +106,6 @@ class _MatMultState extends State<MatMultScreen>{
     );
   }
   void runMM() async {
-    prefix0.log("Time: " + this._reportTime.toString());
     Stopwatch stopwatch = new Stopwatch()..start();
 
     Map args = {
@@ -114,19 +113,26 @@ class _MatMultState extends State<MatMultScreen>{
       M2 : randMat(this._matrixSize),
       TASKS : this._tasks
     };
-    List<List<int>> answer = [];
+
+
+    List<Future<List<List<int>>>> answers = [];
     for (int i = 0; i < this._tasks; i++){
       args[ID] = i;
-      List<List<int>> temp = await compute(matMult, args);
-      answer.addAll(temp);
+      Future<List<List<int>>> temp = compute(matMult, args);
+      answers.add(temp);
     }
+    List<List<int>> result = [];
+    for (int i = 0; i < answers.length; i++){
+      await answers[i].then((partialMatrix) => {
+        result.addAll(partialMatrix)
+      });
+    }
+
     stopwatch.stop();
     setState((){
       _reportTime = stopwatch.elapsedMilliseconds;
       _reportTimeText = _reportTime.toString() + " ms";
     });
-    prefix0.log("Time: " + this._reportTime.toString());
-    prefix0.log("Time text: " + this._reportTimeText);
   }
 }
 
@@ -143,7 +149,7 @@ List<List<int>> randMat(int size){
   return mat;
 }
 
-List<List<int>> matMult(Map args){
+Future<List<List<int>>> matMult(Map args) async{
   List<List<int>> m1 = args[M1];
   List<List<int>> m2 = args[M2];
   int id = args[ID];
@@ -151,6 +157,7 @@ List<List<int>> matMult(Map args){
   int size = m1.length;
 
   List<List<int>> ans = [];
+
 
   int extraLine = 0;
   if (size%tasks > id) extraLine = 1;
@@ -169,7 +176,8 @@ List<List<int>> matMult(Map args){
       ans[i - firstLine].add(sum);
     }
   }
-  return ans;
+
+  return Future.value(ans);
 }
 
 

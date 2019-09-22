@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:androidconcurrency/constants.dart';
 import 'package:androidconcurrency/screens/MatMultScreen.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,7 +29,7 @@ void mm_test(){
     [24, 66, 21]
   ];
 
-  test('Matrix multiplication - single task', (){
+  test('Matrix multiplication - single task', () async {
     Map args = {
       M1: m1,
       M2: m2,
@@ -35,11 +37,17 @@ void mm_test(){
       ID: 0
     };
 
-    List<List<int>> actual = matMult(args);
+    List<List<int>> actual = [];
+    Future<List<List<int>>> futureResult = matMult(args);
+    await futureResult.then((result) => {
+      actual = result
+    });
+    //Future.wait([futureResult]);
+    
     expect(actual, expected);
   });
 
-  test('Matrix multiplication - multi task', (){
+  test('Matrix multiplication - multi task', () async{
     Map args = {
       M1: m1,
       M2: m2,
@@ -47,13 +55,20 @@ void mm_test(){
       ID: 0
     };
 
-    List<List<int>> actual = matMult(args);
+    List<List<int>> actual = [];
+    Future<List<List<int>>> futureResult1 = matMult(args);
 
     args[ID] = 1;
 
-    List<List<int>> s2 = matMult(args);
-    actual.addAll(s2);
-
+    Future<List<List<int>>> futureResult2 = matMult(args);
+    
+    await futureResult1.then((result) => {
+      actual.addAll(result)
+    });
+    await futureResult2.then((result) => {
+      actual.addAll(result)
+    });
+    
     expect(actual, expected);
   });
 }
