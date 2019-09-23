@@ -111,13 +111,13 @@ class _MatMultState extends State<MatMultScreen>{
     Map args = {
       M1 : randMat(this._matrixSize),
       M2 : randMat(this._matrixSize),
-      TASKS : this._tasks
+      MM_TASKS : this._tasks
     };
 
 
     List<Future<List<List<int>>>> answers = [];
     for (int i = 0; i < this._tasks; i++){
-      args[ID] = i;
+      args[MM_ID] = i;
       Future<List<List<int>>> temp = compute(matMult, args);
       answers.add(temp);
     }
@@ -143,7 +143,7 @@ List<List<int>> randMat(int size){
   for (int i = 0; i < size; i++){
     mat.add([]);
     for (int j = 0; j < size; j++){
-      mat[i].add(r.nextInt(MAX_VAL));
+      mat[i].add(r.nextInt(MM_MAX_VAL));
     }
   }
   return mat;
@@ -152,8 +152,8 @@ List<List<int>> randMat(int size){
 Future<List<List<int>>> matMult(Map args) async{
   List<List<int>> m1 = args[M1];
   List<List<int>> m2 = args[M2];
-  int id = args[ID];
-  int tasks = args[TASKS];
+  int id = args[MM_ID];
+  int tasks = args[MM_TASKS];
   int size = m1.length;
 
   List<List<int>> ans = [];

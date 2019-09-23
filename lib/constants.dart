@@ -36,9 +36,9 @@ const PROBL_DESCRIPTION = {
 //Matrix multiplication
 const M1 = "m1";
 const M2 = "m2";
-const ID = "id";
-const TASKS = "tasks";
-const MAX_VAL = 20;
+const MM_ID = "id";
+const MM_TASKS = "tasks";
+const MM_MAX_VAL = 20;
 
 //Image download
 const String CAT = "Cat";
@@ -56,3 +56,10 @@ const IMG_URL = {
   PLATYPUS: BASE_IMG_URL + "platypus.jpg",
   PIGEON: BASE_IMG_URL + "pigeon.jpg"
 };
+
+// Concurrent sum
+const ARR = "arr";
+const S_TASKS = "tasks";
+const S_ID = "id";
+const LEVEL = "level";
+const S_MAX_VAL = 20;

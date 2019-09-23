@@ -33,8 +33,8 @@ void mm_test(){
     Map args = {
       M1: m1,
       M2: m2,
-      TASKS: 1,
-      ID: 0
+      MM_TASKS: 1,
+      MM_ID: 0
     };
 
     List<List<int>> actual = [];
@@ -51,14 +51,14 @@ void mm_test(){
     Map args = {
       M1: m1,
       M2: m2,
-      TASKS: 2,
-      ID: 0
+      MM_TASKS: 2,
+      MM_ID: 0
     };
 
     List<List<int>> actual = [];
     Future<List<List<int>>> futureResult1 = matMult(args);
 
-    args[ID] = 1;
+    args[MM_ID] = 1;
 
     Future<List<List<int>>> futureResult2 = matMult(args);
     
