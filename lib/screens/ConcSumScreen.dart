@@ -1,5 +1,7 @@
 
 
+import 'dart:math';
+
 import 'package:androidconcurrency/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +16,11 @@ class ConcSumScreen extends StatefulWidget{
 
 class _ConcSumState extends State<ConcSumScreen>{
 
+  int _numbers;
+  int _tasks;
   int _reportTime;
   String _reportTimeText = "";
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +52,9 @@ class _ConcSumState extends State<ConcSumScreen>{
                     labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
                 ),
                 keyboardType: TextInputType.number,
+                onChanged: (String text){
+                  this._numbers = int.parse(text);
+                },
               ),
               TextField(
                 decoration: new InputDecoration(
@@ -54,6 +62,9 @@ class _ConcSumState extends State<ConcSumScreen>{
                     labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
                 ),
                 keyboardType: TextInputType.number,
+                onChanged: (String text){
+                  this._tasks = int.parse(text);
+                },
               ),
               Container(
                   alignment: Alignment(0.0, 0.0),
@@ -92,9 +103,25 @@ class _ConcSumState extends State<ConcSumScreen>{
   void runCS() async{
     Stopwatch stopwatch = new Stopwatch()..start();
 
+    Map args = {
+      ARR: randArr(this._numbers),
+      S_TASKS: this._tasks,
+    };
 
   }
-
-
 }
 
+List<int> randArr(int size){
+  Random r = new Random(DateTime.now().millisecondsSinceEpoch);
+  List<int> arr = [];
+  for (int i = 0; i < size; i++){
+    for (int j = 0; j < size; j++){
+      arr.add(r.nextInt(S_MAX_VAL));
+    }
+  }
+  return arr;
+}
+
+Future<List<int>> sumArr(Map args) async{
+  return Future.value([]);
+}
