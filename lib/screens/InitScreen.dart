@@ -1,8 +1,6 @@
 import 'package:androidconcurrency/screens/ConcSumScreen.dart';
 import 'package:androidconcurrency/screens/ImgDownScreen.dart';
 import 'package:androidconcurrency/screens/MatMultScreen.dart';
-import 'package:androidconcurrency/screens/PhilosophersScreen.dart';
-import 'package:androidconcurrency/screens/ProdConsScreen.dart';
 import 'package:androidconcurrency/widgets/ProblemChooser.dart';
 import 'package:flutter/material.dart';
 
@@ -70,14 +68,8 @@ class _InitScreenState extends State<InitScreen> {
       case CONC_SUM:
         Navigator.push(context, MaterialPageRoute(builder: (context) => ConcSumScreen()));
         break;
-      case PHILOSOPHERS:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PhilosophersScreen()));
-        break;
       case IMG_DOWN:
         Navigator.push(context, MaterialPageRoute(builder: (context) => ImgDownScreen()));
-        break;
-      case PROD_CONS:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProdConsScreen()));
         break;
     }
   }
