@@ -45,3 +45,20 @@ const M2 = "m2";
 const ID = "id";
 const TASKS = "tasks";
 const MAX_VAL = 20;
+
+//Image download
+const String CAT = "Cat";
+const String DOG = "Dog";
+const String LION = "Lion";
+const String PLATYPUS = "Platypus";
+const String PIGEON = "Pigeon";
+const String LABEL_CHOOSE_IMG = "Choose an image to download";
+const List IMAGES = [CAT, DOG, LION, PLATYPUS, PIGEON];
+const String BASE_IMG_URL = 'https://gitlab.com/wwvargas/androidconcurrency/raw/master/imgs/';
+const IMG_URL = {
+  CAT: BASE_IMG_URL + "cat.jpg",
+  DOG: BASE_IMG_URL + "dog.jpg",
+  LION: BASE_IMG_URL + "lion.jpg",
+  PLATYPUS: BASE_IMG_URL + "platypus.jpg",
+  PIGEON: BASE_IMG_URL + "pigeon.jpg"
+};
