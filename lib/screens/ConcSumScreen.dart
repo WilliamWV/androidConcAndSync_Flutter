@@ -1,9 +1,11 @@
 
 
+import 'dart:developer' as prefix0;
 import 'dart:math';
 
 import 'package:androidconcurrency/constants.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ConcSumScreen extends StatefulWidget{
@@ -106,7 +108,34 @@ class _ConcSumState extends State<ConcSumScreen>{
     Map args = {
       ARR: randArr(this._numbers),
       S_TASKS: this._tasks,
+      LEVEL: 0,
+      NUMBERS: this._numbers
     };
+
+    int levels = log2(this._numbers).ceil();
+    for (int level = 0; level < levels; level++) {
+      args[LEVEL] = level;
+      List<Future<List<int>>> levelAns = [];
+      int tasksThisLevel = min(this._tasks, this._numbers/pow(2.0, 1.0 + level)).ceil();
+      for (int i = 0; i < tasksThisLevel; i++){
+        args[S_ID] = i;
+        Future<List<int>> taskAns = compute(sumArr, args);
+        levelAns.add(taskAns);
+      }
+      List<int> ans = [];
+      for (int i = 0; i < tasksThisLevel; i++){
+        await levelAns[i].then((partialArr) => {
+          ans.addAll(partialArr)
+        });
+      }
+      args[ARR] = ans;
+    }
+    stopwatch.stop();
+    setState(() {
+      _reportTime = stopwatch.elapsedMilliseconds;
+      _reportTimeText = _reportTime.toString() + " ms";
+    });
+
 
   }
 }
@@ -123,5 +152,34 @@ List<int> randArr(int size){
 }
 
 Future<List<int>> sumArr(Map args) async{
-  return Future.value([]);
+  List<int> arr = args[ARR];
+  int numbers = args[NUMBERS];
+  int level = args[LEVEL];
+  int tasks = args[S_TASKS];
+  int id = args[S_ID];
+  int sums = (numbers/ pow(2.0, 1.0 + level)).ceil();
+  int extraSum = 0;
+  if (sums % tasks > id){
+    extraSum = 1;
+  }
+  int taskSums = sums~/tasks + extraSum;
+  int firstSumOffset = min(id, sums%tasks);
+  int firstSum = id * (sums ~/ tasks) + firstSumOffset;
+
+  List<int> ans = [];
+  for (int i = firstSum; i < firstSum + taskSums; i++){
+    if((numbers / pow(2, level)).ceil() > 2 * i + 1){
+      ans.add(arr[2 * i] + arr[2 * i + 1]);
+    }
+    else {
+      ans.add(arr[2 * i]);
+    }
+
+  }
+
+  return Future.value(ans);
+}
+
+double log2(int num){
+  return log(num)/log(2);
 }

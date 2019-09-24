@@ -1,12 +1,15 @@
 
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:androidconcurrency/constants.dart';
+import 'package:androidconcurrency/screens/ConcSumScreen.dart';
 import 'package:androidconcurrency/screens/MatMultScreen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main(){
   mm_test();
+  sum_test();
 }
 
 void mm_test(){
@@ -70,5 +73,59 @@ void mm_test(){
     });
     
     expect(actual, expected);
+  });
+}
+
+void sum_test(){
+  List<int> arr = [2, 6, 9, 12, 4, 13, 5];
+  int expected = 51;
+
+  test('Concurrent sum - single task', () async{
+    Map args = {
+      ARR: arr,
+      S_TASKS: 1,
+      NUMBERS: 7
+    };
+    int levels = log2(arr.length).ceil();
+    for (int level = 0; level < levels; level++) {
+      args[LEVEL] = level;
+      args[S_ID] = 0;
+      Future<List<int>> taskAns = sumArr(args);
+
+      List<int> ans = [];
+      await taskAns.then((partialArr) => {
+        ans.addAll(partialArr)
+      });
+
+      args[ARR] = ans;
+    }
+    expect(args[ARR][0], expected);
+  });
+
+  test('Concurrent sum - multi task', () async{
+    Map args = {
+      ARR: arr,
+      S_TASKS: 2,
+      NUMBERS: 7
+    };
+    int levels = log2(arr.length).ceil();
+    for (int level = 0; level < levels; level++) {
+      args[LEVEL] = level;
+      List<Future<List<int>>> levelAns = [];
+      int tasksThisLevel = min(2, 7.0/pow(2.0, 1.0 + level)).ceil();
+      for (int i = 0; i < tasksThisLevel; i++){
+        args[S_ID] = i;
+        Future<List<int>> taskAns = sumArr(args);
+        levelAns.add(taskAns);
+      }
+      List<int> ans = [];
+      for (int i = 0; i < tasksThisLevel; i++){
+        await levelAns[i].then((partialArr) => {
+          ans.addAll(partialArr)
+        });
+      }
+      args[ARR] = ans;
+    }
+    expect(args[ARR][0], expected);
   });
 }

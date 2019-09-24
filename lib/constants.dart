@@ -62,4 +62,5 @@ const ARR = "arr";
 const S_TASKS = "tasks";
 const S_ID = "id";
 const LEVEL = "level";
+const NUMBERS = "numbers";
 const S_MAX_VAL = 20;
