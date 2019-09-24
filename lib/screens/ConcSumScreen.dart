@@ -1,6 +1,5 @@
 
 
-import 'dart:developer' as prefix0;
 import 'dart:math';
 
 import 'package:androidconcurrency/constants.dart';
@@ -30,76 +29,80 @@ class _ConcSumState extends State<ConcSumScreen>{
       appBar: AppBar(
           title: Text(CONC_SUM)
       ),
-      body: Center(
-        child: Container(
-          padding: new EdgeInsets.all(MID_PADDING),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                  child:Text(
-                    CONC_SUM,
+      body: ListView(
+        children: <Widget>[
+          Center(
+            child: Container(
+              padding: new EdgeInsets.all(MID_PADDING),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                      child:Text(
+                        CONC_SUM,
+                        style: TextStyle(fontSize: TITLE_FONT_SIZE),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: MID_PADDING)
+                  ),
+                  Text(
+                      PROBL_DESCRIPTION[CONC_SUM],
+                      style: TextStyle(fontSize: DESCRIPTION_FONT_SIZE)
+                  ),
+                  TextField(
+                    decoration: new InputDecoration(
+                        labelText: "Numbers",
+                        labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (String text){
+                      this._numbers = int.parse(text);
+                    },
+                  ),
+                  TextField(
+                    decoration: new InputDecoration(
+                        labelText: "Tasks to use",
+                        labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (String text){
+                      this._tasks = int.parse(text);
+                    },
+                  ),
+                  Container(
+                      alignment: Alignment(0.0, 0.0),
+                      padding: EdgeInsets.symmetric(vertical: LARGE_PADDING),
+                      child:RaisedButton(
+                        textColor: Colors.white,
+                        color: Colors.blue,
+                        child: Text(
+                            "RUN"
+                        ),
+                        onPressed: runCS,
+                      )
+                  ),
+                  Text(
+                    REPORT,
                     style: TextStyle(fontSize: TITLE_FONT_SIZE),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: MID_PADDING)
-              ),
-              Text(
-                  PROBL_DESCRIPTION[CONC_SUM],
-                  style: TextStyle(fontSize: DESCRIPTION_FONT_SIZE)
-              ),
-              TextField(
-                decoration: new InputDecoration(
-                    labelText: "Numbers",
-                    labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (String text){
-                  this._numbers = int.parse(text);
-                },
-              ),
-              TextField(
-                decoration: new InputDecoration(
-                    labelText: "Tasks to use",
-                    labelStyle: TextStyle(fontSize: LABEL_FONT_SIZE)
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (String text){
-                  this._tasks = int.parse(text);
-                },
-              ),
-              Container(
-                  alignment: Alignment(0.0, 0.0),
-                  padding: EdgeInsets.symmetric(vertical: LARGE_PADDING),
-                  child:RaisedButton(
-                    textColor: Colors.white,
-                    color: Colors.blue,
-                    child: Text(
-                        "RUN"
-                    ),
-                    onPressed: runCS,
-                  )
-              ),
-              Text(
-                REPORT,
-                style: TextStyle(fontSize: TITLE_FONT_SIZE),
-              ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    TIME,
-                    style: TextStyle(fontSize: LABEL_FONT_SIZE),
-                  ),
-                  Text(
-                    _reportTimeText,
-                    style: TextStyle(fontSize: LABEL_FONT_SIZE),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        TIME,
+                        style: TextStyle(fontSize: LABEL_FONT_SIZE),
+                      ),
+                      Text(
+                        _reportTimeText,
+                        style: TextStyle(fontSize: LABEL_FONT_SIZE),
+                      )
+                    ],
                   )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
+        ],
+      )
     );
   }
   void runCS() async{
